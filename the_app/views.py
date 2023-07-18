@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 
 job_titles = [
@@ -28,8 +28,11 @@ def jobs(req):
     return HttpResponse(html)
 
 def job_details(req, id):
-    if id == 100:
-        #return redirect("/jobs")
-        return redirect(reverse('jobs_home'))
-    html_return = f"<h1>title: {job_titles[id]}</h1>desc: {job_descs[id] }<h3></h3>"
-    return HttpResponse(html_return)
+    try:
+        if id == 100:
+            #return redirect("/jobs")
+            return redirect(reverse('jobs_home'))
+        html_return = f"<h1>title: {job_titles[id]}</h1>desc: {job_descs[id] }<h3></h3>"
+        return HttpResponse(html_return)
+    except:
+        return HttpResponseNotFound("Not found")
