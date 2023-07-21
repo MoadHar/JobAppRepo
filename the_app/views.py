@@ -1,8 +1,8 @@
 from django.shortcuts import redirect
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
-from django.template import loader
+# from django.template import loader
 
 job_titles = [
         "job1 title",
@@ -15,12 +15,23 @@ job_descs = [
         "job3 dessssk"
         ]
 
+tmp_list = [
+        "alpha", "beta", "omega"
+        ]
+
+
+class TempClass:
+    x = 7314
+
 
 # Create your views here.
 def hello(req):
-    template = loader.get_template("hello.html")
-    ctx = {}
-    return HttpResponse(template.render(ctx, req))
+    # template = loader.get_template("hello.html")
+    # template = loader.get_template("the_app/hello.html")
+    temp_obj = TempClass
+    ctx = {"name": "Djangow", "first_list": tmp_list, "temp_obj": temp_obj, "age":44 }
+    #return HttpResponse(template.render(ctx, req))
+    return render(req, "the_app/hello.html", ctx)
 
 
 def jobs(req):
