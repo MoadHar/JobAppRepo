@@ -1,5 +1,15 @@
-<h1>Hello {{name}}</h1>
+{% if is_authed %}
+  <h1>Hello {{name}}</h1>
+{% else %}
+  <h1>Hello world</h1>
+{% endif %}
 <h1>Age is: {{age}}</h1>
 <h2>{{first_list.0}}</h2>
 <h2>{{first_list.1}}</h2>
 <h3>{{temp_obj.x}}</h3>
+
+<br>
+
+{% for i in first_list %}
+  <p>first list: {{i}}</p>
+{% endfor %}

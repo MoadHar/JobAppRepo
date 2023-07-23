@@ -1,0 +1,6 @@
+<h1> {{count}} available jobs</h1>
+<ul>
+	{% for title in job_titles %}
+		<li><a href='job/{{forloop.counter0}}'>{{title}}</a></li>
+	{% endfor %}
+</ul>

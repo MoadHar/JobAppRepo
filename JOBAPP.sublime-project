@@ -1,0 +1,13 @@
+# JOBAPP.sublime-project
+{
+    // ...
+
+    "settings": {
+        // ...
+        "python_virtualenv": "v_django/",
+        "python_package_paths": [
+            "$home/.buildout/eggs",
+            "addons"
+        ]
+    }
+}
