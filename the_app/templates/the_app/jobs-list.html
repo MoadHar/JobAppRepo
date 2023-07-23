@@ -1,6 +1,7 @@
 <h1> {{count}} available jobs</h1>
+<p>using url tag </p>
 <ul>
 	{% for title in job_titles %}
-		<li><a href='job/{{forloop.counter0}}'>{{title}}</a></li>
+		<li><a href='{% url 'job_details' forloop.counter0 %}'>{{title}}</a></li>
 	{% endfor %}
 </ul>
