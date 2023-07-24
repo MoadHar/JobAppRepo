@@ -4,6 +4,8 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 # from django.template import loader
 
+from .models import JobPost
+
 
 job_titles = [
         "job1 title",
@@ -50,7 +52,8 @@ def jobs(req):
     html += "</ul>"
     return HttpResponse(html)
     """
-    ctx = {"job_titles": job_titles, "count": len(job_titles)}
+    jobs = JobPost.objects.all()
+    ctx = {"jobs": jobs, "count": len(jobs)}
     return render(req, 'the_app/jobs-list.html', ctx)
 
 
@@ -61,10 +64,9 @@ def job_details(req, id):
             return redirect(reverse('jobs_home'))
         # html_return = f"<h1>title: {job_titles[id]}</h1> <h3> desc: {job_descs[id]}</h3>"
         # return HttpResponse(html_return)
-        ctx = {
-        "job_title": job_titles[id],
-        "job_desc": job_descs[id],
-        }
+        # ctx = {"job_title": job_titles[id],"job_desc": job_descs[id]}
+        job = JobPost.objects.get(id=id)
+        ctx = {"job": job}
         return render(req, 'the_app/job-details.html', ctx)
     except:
         return HttpResponseNotFound("Not found")
