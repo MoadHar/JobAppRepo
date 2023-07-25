@@ -57,3 +57,13 @@ class Location(models.Model):
 	state = models.CharField(max_length=100)
 	country = models.CharField(max_length=150)
 	zip = models.CharField(max_length=10)
+
+#jobpost_9 = author_3.jobpost_set.create(title="Ninth job post", description="Example",
+#	salary="9000")
+#author_2.jobpost_set.all()
+#author_1.jobpost_set.add(job10)
+#author_1.jobpost_set.count()
+#autor_1.jobpost_set.filter(title__contains="First")
+#JobPost.object.filter(author__name__contains="samira")
+#JobPost.object.filter(author__name__startswith="samira", author__designation__contains="klba")
+#JobPost.objects.filter(author__in=[1,2])
