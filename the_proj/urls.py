@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
-from django.contrib import admin 
-=======
+
 from django.contrib import admin
->>>>>>> Stashed changes
 from django.urls import path, include
 
 
