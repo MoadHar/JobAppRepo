@@ -9,6 +9,12 @@ from django.utils.text import slugify
 
 # Create your models here.
 
+class Skills(models.Model):
+	name = models.CharField(max_length=200)
+	def __str__(self):
+		return self.name
+
+
 class Author(models.Model):
 	name = models.CharField(max_length=100)
 	company = models.CharField(max_length=100)
@@ -18,6 +24,14 @@ class Author(models.Model):
 		return self.name + ' from: ' + self.company
 
 
+class Location(models.Model):
+	street = models.CharField(max_length=200)
+	city = models.CharField(max_length=100)
+	state = models.CharField(max_length=100)
+	country = models.CharField(max_length=150)
+	zip = models.CharField(max_length=10)
+
+
 class JobPost(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
@@ -25,7 +39,9 @@ class JobPost(models.Model):
     expiry = models.DateField(null=True)
     salary = models.IntegerField()
     slug = models.SlugField(null=True, max_length=40, unique=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
+    skills = models.ManyToManyField(Skills)
 
     def save(self, *args, **kwargs):
     	if not self.id:
@@ -51,12 +67,7 @@ class Person(models.Model):
 	def __str__(self):
 		return self.firstname + ' ' + self.lastname + ' (from) ' + self.city
 
-class Location(models.Model):
-	street = models.CharField(max_length=200)
-	city = models.CharField(max_length=100)
-	state = models.CharField(max_length=100)
-	country = models.CharField(max_length=150)
-	zip = models.CharField(max_length=10)
+
 
 #jobpost_9 = author_3.jobpost_set.create(title="Ninth job post", description="Example",
 #	salary="9000")

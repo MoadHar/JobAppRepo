@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Person, JobPost, Author
+from .models import JobPost, Author, Skills, Location 
 
 
 class JobAdmin(admin.ModelAdmin):
@@ -23,6 +23,9 @@ class JobAdmin(admin.ModelAdmin):
              ),
     )
 # Register your models here.
-admin.site.register(JobPost, JobAdmin)
+#admin.site.register(JobPost, JobAdmin)
+admin.site.register(JobPost)
 admin.site.register(Author)
-admin.site.register(Person)
+#admin.site.register(Person)
+admin.site.register(Skills)
+admin.site.register(Location)
