@@ -8,6 +8,9 @@
 <body>
 	<form method="post">
 		{% csrf_token %}
+		{% if email_empty %}
+			<p>{{email_empty}}</p>
+		{%endif%}
 		<label for="f_name">First Name</label>
 		<input type="text" name="firstname" id="f_name" placeholder="your firstname" required>
 		<br>
