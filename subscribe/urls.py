@@ -20,4 +20,5 @@ from subscribe import views
 
 urlpatterns = [
     path('', views.subscribe, name='u_subscribe'),
+    path('tnx', views.tnx, name='u_tnx'),
 ]

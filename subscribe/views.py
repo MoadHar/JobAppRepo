@@ -1,19 +1,30 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from subscribe.models import Subscribe
+from subscribe.forms import SubscribeForm
+from django.urls import reverse
 
 # Create your views here.
 def subscribe(req):
+	subsForm = SubscribeForm()
 	ctx = {}
+	ctx["form"] = subsForm
 	if req.POST:
-		fname = req.POST["firstname"]
-		lname = req.POST["lastname"]
-		email = req.POST["email"]
-		print("this is a POST method request:", fname, lname, email)
-		if email =="" or fname == "" or lname =="":
-			ctx["email_empty"] = "email or fname or lname not entered"
+		subsForm = SubscribeForm(req.POST)
+		ctx["form"] = subsForm
+		if subsForm.is_valid():
+			print("valid form")
+			ctx["form"] = subsForm
+			fname = subsForm.cleaned_data["first_name"]
+			lname = subsForm.cleaned_data["last_name"]
+			email = subsForm.cleaned_data["email"]
+			subs = Subscribe(first_name=fname, last_name=lname, email=email)
+			subs.save()
+			return redirect(reverse("u_tnx"))
 		else:
-			subsribe = Subscribe(first_name=fname, last_name=lname, email=email)
-			subsribe.save()
-
+			print("invalidd: ")
 	return render(req, 'subscribe/subscribe.html', ctx)
+
+def tnx(req):
+	ctx = {}
+	return render(req, "subscribe/thanks.html", ctx)
