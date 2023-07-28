@@ -27,29 +27,37 @@ class Author(models.Model):
 class Location(models.Model):
 	street = models.CharField(max_length=200)
 	city = models.CharField(max_length=100)
-	state = models.CharField(max_length=100)
+	state = models.CharField(max_length=100, blank=True)
 	country = models.CharField(max_length=150)
-	zip = models.CharField(max_length=10)
+	zip = models.CharField(max_length=10, blank=True)
+
+	def __str__(self):
+		return self.city + ' : ' + self.street + ' :: ' + self.country
 
 
 class JobPost(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.CharField(max_length=200)
-    date = models.DateTimeField(auto_now_add=True)
-    expiry = models.DateField(null=True)
-    salary = models.IntegerField()
-    slug = models.SlugField(null=True, max_length=40, unique=True)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
-    skills = models.ManyToManyField(Skills)
+	JOB_TYPE_CHOICES = [
+		('Full Time', 'Full Time'),
+		('Part Time', 'Part Time'),
+	]
+	title = models.CharField(max_length=200)
+	description = models.TextField()
+	date = models.DateTimeField(auto_now_add=True)
+	expiry = models.DateField(null=True)
+	salary = models.IntegerField()
+	slug = models.SlugField(null=True, max_length=40, unique=True)
+	location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
+	author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
+	skills = models.ManyToManyField(Skills)
+	type = models.CharField(max_length=200, null=False, choices=JOB_TYPE_CHOICES)
 
-    def save(self, *args, **kwargs):
-    	if not self.id:
-    		self.slug = slugify(self.title)
-    	return super(JobPost, self).save(*args, **kwargs)
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.slug = slugify(self.title)
+		return super(JobPost, self).save(*args, **kwargs)
 
-    def __str__(self):
-    	return self.title + ' <' + str(self.salary) + '>'
+	def __str__(self):
+		return self.title + ' <' + str(self.salary) + '>'
 
 class Person(models.Model):
 	firstname = models.CharField(max_length=50)

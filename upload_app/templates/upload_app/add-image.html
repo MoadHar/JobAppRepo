@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Upload File</title>
+</head>
+<body>
+	<form method="post" enctype="multipart/form-data">
+		{%csrf_token%}
+		{{form.as_p}}
+		<button type="submit">Upload</button>
+	</form>
+	{% if saved_object %}
+		<h3>Upload successful: {{saved_object.image.url}}</h3>
+		<h3>image description: {{saved_object.desc}}</h3>
+		<img src="{{saved_object.image.url}}" alt="the image" style="max-height:500px">
+	{% endif %}
+</body>
+</html>
