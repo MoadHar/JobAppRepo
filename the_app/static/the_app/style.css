@@ -13,7 +13,7 @@
   --nav: #1b2436;
 }
 body {
-  background: #f5f6f5;
+  background: #a5f6b5;
 }
 button {
   border: none;
@@ -355,7 +355,8 @@ margin-bottom: 2em;
 form {
   width: 50%;
   padding: 3em 2em;
-  background: white;
+  /*background: white;*/
+  background: #b7f5c4;
   border-radius: 10px;
   margin: 5em auto;
   box-shadow: var(--shadow);
