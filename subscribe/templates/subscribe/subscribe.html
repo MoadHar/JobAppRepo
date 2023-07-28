@@ -1,58 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Subscribe Form</title>
+	<link rel="stylesheet" type="text/css" href="{% static "subscribe/main.css" %}">
 </head>
 <body>
+	<h1>Subscription Form</h1>
 	<form method="post">
 		{%csrf_token%}
 		{{form.as_p}}
-		
-		
-
-		<!-- rendering django form fields manually -->
-		<!-- field by field
-		<div class="subscribe-filed">
-			{{form.first_name.errors}}
-			<label for="{{form.first_name.id_for_label}}"> First Name: </label>
-			{{form.first_name}}
-		-->
-
-			<!--
-				other form fields attributes:
-					field.field_name
-					field.errors, label, id_for_label, help_text, label_tag
-			-->
-		<!-- rendering fields throught a loop 
-		{% for field in form %}
-			<div> 
-				{{field.errors}}
-				{{field.label_tag}}
-				{{field}}
-			</div>
-		{% endfor %}
-
-		end through a loop-->
-		
-
 		<input type="submit" name="Submit">
-		<!-- {% csrf_token %}
-		{% if email_empty %}
-			<p>{{email_empty}}</p>
-		{%endif%}
-		<label for="f_name">First Name</label>
-		<input type="text" name="firstname" id="f_name" placeholder="your firstname" required>
-		<br>
-		<label for="l_name">Laste Name</label>
-		<input type="text" name="lastname" id="l_name" placeholder="your lastname" required>
-		<br>
-		<label for="email">Email</label>
-		<input type="email" name="email" id="email" placeholder="your email" required>
-		<br>
-		<input type="submit" value="**Submit**"> -->
-
 	</form>
+	<button onclick="clicked_popup()">Click here</button>
+	<script type="text/javascript" src="{% static "subscribe/main.js" %}"></script>
 </body>
 </html>
