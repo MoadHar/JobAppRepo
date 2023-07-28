@@ -8,9 +8,9 @@
 <body>
 	<form method="post">
 		{%csrf_token%}
-		<!--{{form}}
-			django form
-		-->
+		{{form.as_p}}
+		
+		
 
 		<!-- rendering django form fields manually -->
 		<!-- field by field
@@ -25,17 +25,17 @@
 					field.field_name
 					field.errors, label, id_for_label, help_text, label_tag
 			-->
-		<!-- rendering fields throught a loop -->
-		{%for field in form%}
-			<div class="subscribe_field">
+		<!-- rendering fields throught a loop 
+		{% for field in form %}
+			<div> 
 				{{field.errors}}
 				{{field.label_tag}}
 				{{field}}
 			</div>
-		{%endfor%}
+		{% endfor %}
 
-		<!-- end through a loop-->
-		</div>
+		end through a loop-->
+		
 
 		<input type="submit" name="Submit">
 		<!-- {% csrf_token %}
