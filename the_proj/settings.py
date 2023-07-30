@@ -23,12 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@7h4x7w5r_7f(i@z6)_oj9%#149_gak*be-=^4w1q%mz)^d4fp'
+# SECRET_KEY = 'django-insecure-@7h4x7w5r_7f(i@z6)_oj9%#149_gak*be-=^4w1q%mz)^d4fp'
+SECRET_KEY = os.getenv("SECRET_KEY", 'BA@N(G=O8MÈAàN4G-O_-=*/-8214SQ8DKSa@LQ(45%3131SQD-insecure-@7h4x7w5r_7f(i@z6)_oj9%#149_gak*be-=^4w1q%qz)^d4fp')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = False
+DEBUG = os.getenv("IS_DEV", True)
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [os.getenv("ALLWD_APP_HOSTS"), '127.0.0.1']
 
 
 # Application definition
@@ -81,15 +84,8 @@ WSGI_APPLICATION = 'the_proj.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'postgresql://postgres:57zgeR2YdEyFaVVawppR@containers-us-west-191.railway.app:6093/railway'
-        'URL': os.getenv('POSTGRES_URL'),
-        'NAME': os.getenv('PGNAME'),
-        'USER': os.getenv('PGUSER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD')
-        'HOST': os.getenv('PGHOST'),
-        'PORT': os.getenv('PGPORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -128,6 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / 'STATICFiles'
 STATIC_URL = 'static/'
 MEDIA_ROOT = BASE_DIR / 'UPLOADS/'
 MEDIA_URL = "media/"
